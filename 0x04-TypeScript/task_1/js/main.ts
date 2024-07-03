@@ -4,37 +4,42 @@ interface Teacher {
     fullTimeEmployee: boolean;
     location: string;
     yearsOfExperience?: number;
-    [key: string]: any;
+    contract: any;
 }
 
-class TeacherClass implements Teacher {
-    readonly firstName: string;
-    readonly lastName: string;
-    fullTimeEmployee: boolean;
-    location: string;
-    yearsOfExperience?: number;
+interface Directors extends Teacher {
+    numberOfReports: number
+}
+
+interface printTeacherFunction {
+    (firstName: string, lastName: string): string;
+}
+
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+    return `${firstName.charAt(0)}. ${lastName}`;
+}
+
+console.log(printTeacher('John', 'Doe'));
+
+class studentClass {
+    firstName: string;
+    lastName: string;
 
     constructor(
         firstName: string,
-        lastName: string,
-        fullTimeEmployee: boolean,
-        location: string,
-        yearsOfExperience?: number,
-        additionalProperties?: { [key: string]: any }
+        lastName: string
     ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fullTimeEmployee = fullTimeEmployee;
-        this.location = location;
-        if (yearsOfExperience !== undefined) {
-            this.yearsOfExperience = yearsOfExperience;
-        }
-        if (additionalProperties) {
-            for (const key in additionalProperties) {
-                if (additionalProperties.hasOwnProperty(key)) {
-                    (this as any)[key] = additionalProperties[key];
-                }
-            }
-        }
+        this.firstName = firstName,
+            this.lastName = lastName
+    }
+
+    workOnHomework() {
+        console.log('Currently working')
+        return ('Currently working')
+    }
+
+    displayName() {
+        console.log(this.firstName);
+        return this.firstName;
     }
 }
